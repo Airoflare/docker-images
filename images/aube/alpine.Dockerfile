@@ -11,7 +11,7 @@ ARG NODE_VERSION=24.18.0
 FROM node:${NODE_VERSION}-alpine AS node
 
 # Download stage - fetch prebuilt static musl binaries from GitHub releases
-FROM alpine:3.22 AS downloader
+FROM alpine:3.24 AS downloader
 
 ARG AUBE_VERSION
 ARG TARGETARCH
@@ -28,7 +28,7 @@ RUN case "${TARGETARCH}" in \
     chmod +x /usr/local/bin/aube /usr/local/bin/aubr /usr/local/bin/aubx
 
 # Runtime stage
-FROM alpine:3.22
+FROM alpine:3.24
 
 ARG AUBE_VERSION
 ARG NODE_VERSION

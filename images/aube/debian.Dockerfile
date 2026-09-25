@@ -10,7 +10,7 @@ ARG NODE_VERSION=24.18.0
 FROM node:${NODE_VERSION}-trixie-slim AS node
 
 # Download stage - fetch prebuilt static musl binaries from GitHub releases
-FROM alpine:3.22 AS downloader
+FROM alpine:3.24 AS downloader
 
 ARG AUBE_VERSION
 ARG TARGETARCH
