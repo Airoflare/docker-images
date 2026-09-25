@@ -17,16 +17,18 @@ All images are multi-arch (`linux/amd64`, `linux/arm64`). `<version>` below is t
 
 | Variant | Base | Tags |
 |---|---|---|
-| **alpine** (default) | Alpine 3.22 (musl) | `latest`, `alpine`, `<version>`, `v<version>`, `<version>-alpine`, `v<version>-alpine`, `<version>-<date>`, `<version>-alpine-<date>` |
+| **alpine** (default) | Alpine (musl) | `latest`, `alpine`, `<version>`, `v<version>`, `<version>-alpine`, `v<version>-alpine`, `<version>-<date>`, `<version>-alpine-<date>` |
 | **debian** | Debian trixie-slim (glibc) | `debian`, `<version>-debian`, `v<version>-debian`, `<version>-debian-<date>` |
 
 Images are rebuilt every week, so all tags except the `-<date>` tags move to the newest build. Pin a `-<date>` tag (or a digest) if you need the exact same image every time. See [tags](../../README.md#tags).
+
+For the exact Alpine, Node and aube versions in a given tag, see the [GHCR package page](https://github.com/Airoflare/docker-images/pkgs/container/aube) or the [`alpine.Dockerfile`](alpine.Dockerfile) / [`debian.Dockerfile`](debian.Dockerfile).
 
 Use the **debian** variant if your app has native dependencies that don't play well with musl (glibc-only prebuilt binaries, sharp/canvas edge cases, etc.). Otherwise the alpine variant is smaller.
 
 ## What's inside
 
-- Node.js **24.18.0** (`NODE_VERSION` in the Dockerfiles, kept up to date by Renovate) copied onto a bare base image — only `ca-certificates` and node's runtime libs are added
+- Node.js (current 24.x LTS, pinned as `NODE_VERSION` in the Dockerfiles and kept up to date by Renovate) copied onto a bare base image — only `ca-certificates` and node's runtime libs are added
 - `aube` static musl binary from [official GitHub releases](https://github.com/aubepkg/aube/releases), with `aubr` (script runner) and `aubx` (like npx) as symlinks — they are identical multi-call binaries, and the same static binary works in both variants
 - No npm / npx / corepack / yarn
 
