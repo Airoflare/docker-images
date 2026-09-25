@@ -26,7 +26,18 @@ All images are rebuilt every week to get base image security fixes. The version 
 
 ## Verify an image
 
-Every image has an SBOM and SLSA provenance attached:
+Every image is **keyless-signed** with [cosign](https://docs.sigstore.dev/) and has an SBOM and SLSA provenance attached.
+
+Verify the signature (works for the GHCR or Docker Hub copy — swap the registry). The identity is the GitHub Actions workflow that built it, so no public key is needed:
+
+```bash
+cosign verify \
+  --certificate-identity-regexp '^https://github.com/Airoflare/docker-images/.github/workflows/build.yml@.*$' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  ghcr.io/airoflare/aube:latest
+```
+
+Inspect the SBOM and provenance:
 
 ```bash
 docker buildx imagetools inspect ghcr.io/airoflare/aube:latest --format '{{ json .SBOM }}'

@@ -49,11 +49,19 @@ annotations=(
 )
 
 for registry in ghcr.io docker.io; do
+  repo="$registry/$OWNER/$IMAGE"
   args=()
-  for t in "${tags[@]}"; do args+=(-t "$registry/$OWNER/$IMAGE:$t"); done
+  for t in "${tags[@]}"; do args+=(-t "$repo:$t"); done
 
-  echo "Publish $registry/$OWNER/$IMAGE: ${tags[*]}"
+  echo "Publish $repo: ${tags[*]}"
   docker buildx imagetools create "${annotations[@]}" "${args[@]}" "${sources[@]}"
+
+  # Keyless-sign the multi-arch index by digest (all tags share it). The GitHub
+  # OIDC identity is recorded in Fulcio's cert and the signature in Rekor; verify
+  # with the workflow identity and oidc-issuer (see the repo README).
+  digest="$(docker buildx imagetools inspect "$repo:${tags[0]}" --format '{{.Manifest.Digest}}')"
+  echo "Sign $repo@$digest"
+  cosign sign --yes "$repo@$digest"
 done
 
 {
