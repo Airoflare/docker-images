@@ -10,22 +10,17 @@ ARG NODE_VERSION=24.18.0
 
 FROM node:${NODE_VERSION}-alpine AS node
 
-# Download stage - fetch prebuilt static musl binaries from GitHub releases
+# Download stage - fetch prebuilt static musl binaries from GitHub releases and
+# verify them against aube's sigstore release bundle (see fetch-aube.sh).
 FROM alpine:3.24 AS downloader
 
 ARG AUBE_VERSION
 ARG TARGETARCH
 
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl ca-certificates
 
-RUN case "${TARGETARCH}" in \
-        amd64) ARCH="x86_64" ;; \
-        arm64) ARCH="aarch64" ;; \
-        *) echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
-    esac && \
-    curl -fsSL "https://github.com/aubepkg/aube/releases/download/${AUBE_VERSION}/aube-${AUBE_VERSION}-${ARCH}-unknown-linux-musl.tar.gz" \
-        | tar -xz -C /usr/local/bin && \
-    chmod +x /usr/local/bin/aube /usr/local/bin/aubr /usr/local/bin/aubx
+COPY fetch-aube.sh /usr/local/bin/fetch-aube.sh
+RUN sh /usr/local/bin/fetch-aube.sh
 
 # Runtime stage
 FROM alpine:3.24

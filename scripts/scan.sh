@@ -16,30 +16,39 @@ for cfg in images/*/image.json; do
   readme="images/$image/README.md"
   variants=()
   while IFS= read -r v; do variants+=("$v"); done < <(jq -r '.variants[]' "$cfg")
+  # Same default as the build plan: scan every arch the image is published for.
+  archs=()
+  while IFS= read -r a; do archs+=("$a"); done \
+    < <(jq -r '(.archs // ["amd64","arm64"])[]' "$cfg")
 
   rows=()
   for variant in "${variants[@]}"; do
     if [ "$variant" = "default" ]; then tag="latest"; else tag="$variant"; fi
     ref="ghcr.io/$OWNER/$image:$tag"
-    echo "Scanning $ref"
 
-    # One scan per variant; keep only fixed + unfixed OS/language CVEs.
-    json="$(trivy image --quiet --scanners vuln --format json \
-      --severity "$SEVERITIES" "$ref")"
+    # Trivy scans only the manifest's default platform (amd64), so scan each
+    # arch explicitly - otherwise arm64 gets no CVE numbers.
+    for arch in "${archs[@]}"; do
+      echo "Scanning $ref (linux/$arch)"
 
-    # Count vulnerabilities per severity from the Trivy JSON.
-    read -r crit high med low unk < <(jq -r '
-      [.Results[]?.Vulnerabilities[]?.Severity] as $s
-      | [ "CRITICAL","HIGH","MEDIUM","LOW","UNKNOWN" ]
-      | map(. as $x | ($s | map(select(. == $x)) | length))
-      | @tsv' <<<"$json")
+      # One scan per variant+arch; keep only fixed + unfixed OS/language CVEs.
+      json="$(trivy image --quiet --scanners vuln --format json \
+        --platform "linux/$arch" --severity "$SEVERITIES" "$ref")"
 
-    rows+=("| \`$tag\` | $crit | $high | $med | $low | $unk |")
+      # Count vulnerabilities per severity from the Trivy JSON.
+      read -r crit high med low unk < <(jq -r '
+        [.Results[]?.Vulnerabilities[]?.Severity] as $s
+        | [ "CRITICAL","HIGH","MEDIUM","LOW","UNKNOWN" ]
+        | map(. as $x | ($s | map(select(. == $x)) | length))
+        | @tsv' <<<"$json")
+
+      rows+=("| \`$tag\` | $arch | $crit | $high | $med | $low | $unk |")
+    done
   done
 
   block="$(printf '%s\n' \
-    "| Tag | Critical | High | Medium | Low | Unknown |" \
-    "|---|---|---|---|---|---|" \
+    "| Tag | Arch | Critical | High | Medium | Low | Unknown |" \
+    "|---|---|---|---|---|---|---|" \
     "${rows[@]}" \
     "" \
     "_Scanned $DATE with Trivy $TRIVY_VERSION. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._")"
