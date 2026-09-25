@@ -5,6 +5,20 @@
     "helpers:pinGitHubActionDigests",
     "schedule:weekends"
   ],
+  "customManagers": [
+    {
+      "description": "Pick up `# renovate:` comments on version vars (Trivy, build-time cosign)",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)\\.github/workflows/.+\\.ya?ml$/",
+        "/(^|/)fetch-aube\\.sh$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+[A-Za-z_]+ *[:=] *['\"]?(?<currentValue>[^\\s'\"]+)"
+      ],
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    }
+  ],
   "packageRules": [
     {
       "description": "Stay on Node 24 (LTS). Change this to move to a new major.",

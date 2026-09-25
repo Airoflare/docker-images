@@ -32,7 +32,7 @@ Verify the signature (works for the GHCR or Docker Hub copy — swap the registr
 
 ```bash
 cosign verify \
-  --certificate-identity-regexp '^https://github.com/Airoflare/docker-images/.github/workflows/build.yml@.*$' \
+  --certificate-identity-regexp '^https://github\.com/Airoflare/docker-images/\.github/workflows/build\.yml@refs/heads/master$' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   ghcr.io/airoflare/aube:latest
 ```
