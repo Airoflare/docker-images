@@ -49,6 +49,8 @@ Each arch is built natively on its own runner and pushed by digest. The publish 
 
 [Renovate](https://docs.renovatebot.com/) opens PRs on weekends for new Node versions, base images and GitHub Actions ([`renovate.json`](renovate.json)). Merging a PR rebuilds the images it changed.
 
+A second workflow, [`security.yml`](.github/workflows/security.yml), runs [Trivy](https://trivy.dev) once a week (after the rebuild) and writes a vulnerability count table into each image README. See the **Vulnerabilities** table in an image README, for example [aube](images/aube#vulnerabilities).
+
 ## Add an image
 
 1. Make a folder `images/<name>/`. The folder name is the image name.

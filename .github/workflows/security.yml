@@ -1,0 +1,70 @@
+name: Scan images
+
+# Scans the published image variants with Trivy and updates the vulnerability
+# table in each image README. The build workflow dispatches this after any
+# rebuild (see build.yml's "scan" job) so fixed CVEs drop out at once; the
+# weekly cron is a backstop that also picks up newly published advisories.
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Mon 06:00 UTC, backstop after the 04:00 weekly rebuild
+  workflow_dispatch:
+
+concurrency:
+  group: scan-images
+  cancel-in-progress: false
+
+permissions: {}
+
+env:
+  OWNER: airoflare
+  # renovate: datasource=github-releases depName=aquasecurity/trivy
+  TRIVY_VERSION: 0.74.0
+
+jobs:
+  scan:
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: write   # push the README updates
+      packages: read    # pull the images from GHCR
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true   # needed to push the auto-commit
+
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Install the Trivy CLI from its canonical release, pinned and verified.
+      # (The trivy-action was tag-hijacked in Mar 2026, so we avoid it.)
+      - name: Install Trivy
+        run: |
+          cd "$RUNNER_TEMP"
+          base="https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}"
+          curl -sSfL -O "$base/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          curl -sSfL -O "$base/trivy_${TRIVY_VERSION}_checksums.txt"
+          grep " trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz\$" \
+            "trivy_${TRIVY_VERSION}_checksums.txt" | sha256sum -c -
+          tar xzf "trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" trivy
+          sudo mv trivy /usr/local/bin/trivy
+          trivy --version
+
+      - name: Scan images and update READMEs
+        env:
+          # lets Trivy pull its vulnerability DB from GHCR without rate limits
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/scan.sh
+
+      - name: Commit the updated tables
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet -- 'images/*/README.md'; then
+            echo "No vulnerability-table changes."
+            exit 0
+          fi
+          git add images/*/README.md
+          git commit -m 'Update vulnerability tables [skip ci]'
+          git push

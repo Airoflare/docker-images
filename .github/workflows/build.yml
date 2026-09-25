@@ -177,3 +177,19 @@ jobs:
           SKIP_MOVING_TAGS: ${{ inputs.skip_moving_tags }}
           DIGESTS_DIR: ${{ runner.temp }}/digests
         run: bash scripts/publish.sh
+
+  # Rescan as soon as something was rebuilt, so the README CVE counts drop
+  # immediately. Without this, a fix waits for the weekly scan and the tables
+  # keep counting already-fixed CVEs until then.
+  scan:
+    needs: [plan, publish]
+    if: ${{ !cancelled() && needs.plan.outputs.has_builds == 'true' }}
+    runs-on: ubuntu-26.04
+    permissions:
+      actions: write   # dispatch the scan workflow
+    steps:
+      - name: Trigger the image scan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: gh workflow run security.yml --repo "$REPO" --ref "$GITHUB_REF_NAME"

@@ -30,6 +30,12 @@ Use the **debian** variant if your app has native dependencies that don't play w
 - `aube` static musl binary from [official GitHub releases](https://github.com/aubepkg/aube/releases), with `aubr` (script runner) and `aubx` (like npx) as symlinks — they are identical multi-call binaries, and the same static binary works in both variants
 - No npm / npx / corepack / yarn
 
+## Vulnerabilities
+
+<!-- TRIVY:START -->
+_Not scanned yet. The table is filled in by the weekly [Scan images](../../.github/workflows/security.yml) workflow._
+<!-- TRIVY:END -->
+
 ## Usage
 
 As a build stage in your app's Dockerfile:
