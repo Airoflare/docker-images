@@ -18,7 +18,7 @@ All images are multi-arch (`linux/amd64`, `linux/arm64`). `<version>` below is t
 | Variant | Base | Tags |
 |---|---|---|
 | **alpine** (default) | Alpine 3.22 (musl) | `latest`, `alpine`, `<version>`, `v<version>`, `<version>-alpine`, `v<version>-alpine`, `<version>-<date>`, `<version>-alpine-<date>` |
-| **debian** | Debian bookworm-slim (glibc) | `debian`, `<version>-debian`, `v<version>-debian`, `<version>-debian-<date>` |
+| **debian** | Debian trixie-slim (glibc) | `debian`, `<version>-debian`, `v<version>-debian`, `<version>-debian-<date>` |
 
 Images are rebuilt every week, so all tags except the `-<date>` tags move to the newest build. Pin a `-<date>` tag (or a digest) if you need the exact same image every time. See [tags](../../README.md#tags).
 

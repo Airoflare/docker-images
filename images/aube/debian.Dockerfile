@@ -1,4 +1,4 @@
-# Aube (https://aube.sh) + Node.js on Debian (bookworm-slim)
+# Aube (https://aube.sh) + Node.js on Debian (trixie-slim)
 # glibc variant for JS apps whose native dependencies don't play well with musl.
 #
 # Same layout as the Alpine variant: bare base image + node binary + a single
@@ -7,7 +7,7 @@
 
 ARG NODE_VERSION=24.18.0
 
-FROM node:${NODE_VERSION}-bookworm-slim AS node
+FROM node:${NODE_VERSION}-trixie-slim AS node
 
 # Download stage - fetch prebuilt static musl binaries from GitHub releases
 FROM alpine:3.22 AS downloader
@@ -27,7 +27,7 @@ RUN case "${TARGETARCH}" in \
     chmod +x /usr/local/bin/aube /usr/local/bin/aubr /usr/local/bin/aubx
 
 # Runtime stage
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ARG AUBE_VERSION
 ARG NODE_VERSION

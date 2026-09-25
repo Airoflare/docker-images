@@ -38,7 +38,7 @@ env:
 
 jobs:
   plan:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       packages: read
@@ -133,7 +133,7 @@ jobs:
     # publish the variants that built, even if another image failed
     if: ${{ !cancelled() && needs.plan.outputs.has_builds == 'true' }}
     name: publish ${{ matrix.image }} ${{ matrix.variant }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       packages: write

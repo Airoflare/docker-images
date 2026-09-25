@@ -95,8 +95,8 @@ for dir in images/*/; do
     fi
 
     for arch in $archs; do
-      runner="ubuntu-24.04"
-      [ "$arch" = "arm64" ] && runner="ubuntu-24.04-arm"
+      runner="ubuntu-26.04"
+      [ "$arch" = "arm64" ] && runner="ubuntu-26.04-arm"
       builds=$(jq -c \
         --arg image "$name" --arg version "$version" --arg variant "$variant" \
         --arg arch "$arch" --arg runner "$runner" --arg file "$file" \
