@@ -52,42 +52,46 @@ for dir in images/*/; do
   if [ -n "${INPUT_IMAGE:-}" ] && [ "$name" != "$INPUT_IMAGE" ]; then continue; fi
   if [ "$EVENT" = "push" ] && ! grep -qx "$name" <<< "$changed"; then continue; fi
 
-  if [ -n "${INPUT_VERSION:-}" ]; then
-    version="$INPUT_VERSION"
-  else
-    type=$(jq -r '.upstream.type' "$cfg")
-    case "$type" in
-      github-release)
-        repo=$(jq -r '.upstream.repo' "$cfg")
-        version=$(gh api "repos/$repo/releases/latest" --jq '.tag_name')
-        ;;
-      static)
-        version=$(jq -r '.upstream.version' "$cfg")
-        ;;
-      *)
-        echo "::error::$name: unknown upstream type '$type'"
-        exit 1
-        ;;
-    esac
-  fi
-
-  if [ -z "$version" ] || [ "$version" = "null" ]; then
-    echo "::error::$name: could not find the version"
+  # Each image owns its versioning in scripts/helpers/<image>.sh: given a variant
+  # ($1) it prints that variant's version (e.g. a GitHub release tag or an Alpine
+  # package version). A dispatch version overrides it, so a helper is required
+  # only when no version was passed in.
+  helper="scripts/helpers/$name.sh"
+  if [ -z "${INPUT_VERSION:-}" ] && [ ! -x "$helper" ]; then
+    echo "::error::$name: no version input and no helper at $helper"
     exit 1
   fi
 
-  # The default variant always gets the bare version tag, so check that tag
-  if [ "$force" != "true" ] && docker manifest inspect "ghcr.io/$OWNER/$name:$version" > /dev/null 2>&1; then
-    echo "$name $version: already published, skip"
-    continue
-  fi
-  echo "$name $version: build"
-
   default_variant=$(jq -r '.default_variant // .variants[0]' "$cfg")
   archs=$(jq -r '(.archs // ["amd64", "arm64"]) | join(" ")' "$cfg")
-  build_args="$(jq -r '.version_arg // "VERSION"' "$cfg")=$version"
+  version_arg=$(jq -r '.version_arg // "VERSION"' "$cfg")
 
   for variant in $(jq -r '.variants[]' "$cfg"); do
+    if [ -n "${INPUT_VERSION:-}" ]; then
+      version="$INPUT_VERSION"
+    else
+      version=$("$helper" "$variant")
+    fi
+
+    if [ -z "$version" ] || [ "$version" = "null" ]; then
+      echo "::error::$name $variant: could not find the version"
+      exit 1
+    fi
+
+    # The default variant carries the bare version tag; a named variant carries
+    # "<version>-<variant>". Probe that tag to see if this variant is published.
+    if [ "$variant" = "$default_variant" ]; then
+      probe="$version"
+    else
+      probe="$version-$variant"
+    fi
+    if [ "$force" != "true" ] && docker manifest inspect "ghcr.io/$OWNER/$name:$probe" > /dev/null 2>&1; then
+      echo "$name $variant $version: already published, skip"
+      continue
+    fi
+    echo "$name $variant $version: build"
+
+    build_args="$version_arg=$version"
     if [ "$variant" = "default" ]; then
       file="images/$name/Dockerfile"
     else

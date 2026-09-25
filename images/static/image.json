@@ -1,0 +1,8 @@
+{
+  "description": "Small runtime base images for static binaries, with optional BusyBox shell, curl, and CA certificates.",
+  "homepage": "https://github.com/Airoflare/docker-images/tree/master/images/static",
+  "license": "MIT",
+  "version_arg": "STATIC_VERSION",
+  "variants": ["minimal", "shell", "curl", "certs"],
+  "default_variant": "minimal"
+}

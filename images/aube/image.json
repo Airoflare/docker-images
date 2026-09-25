@@ -2,7 +2,6 @@
   "description": "Node.js with the aube package manager, for building JS apps. No npm, npx, yarn or corepack.",
   "homepage": "https://aube.sh",
   "license": "MIT",
-  "upstream": { "type": "github-release", "repo": "aubepkg/aube" },
   "version_arg": "AUBE_VERSION",
   "variants": ["alpine", "debian"],
   "default_variant": "alpine"

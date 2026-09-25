@@ -11,7 +11,8 @@
       "customType": "regex",
       "managerFilePatterns": [
         "/(^|/)\\.github/workflows/.+\\.ya?ml$/",
-        "/(^|/)fetch-aube\\.sh$/"
+        "/(^|/)fetch-aube\\.sh$/",
+        "/(^|/)scripts/helpers/.+\\.sh$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+[A-Za-z_]+ *[:=] *['\"]?(?<currentValue>[^\\s'\"]+)"
