@@ -8,8 +8,8 @@ Compared with the official `cloudflare/cloudflared` image (based on `distroless/
 - **Offer a `debug` variant with a shell.** The official image is distroless — there is no `/bin/sh`, so you cannot `docker exec` in to diagnose a tunnel. Our `debug` variant adds BusyBox (`sh`, `wget`, `nslookup`, `ping`, `netstat`, `ip`).
 - **Are keyless-signed with an SBOM and SLSA provenance**, published to **both GHCR and Docker Hub**, and **rebuilt weekly** for CA/BusyBox security refreshes. The official image is unsigned and ships no SBOM.
 
-> [!WARNING]
-> Cloudflare publishes **no checksum or signature** with the `cloudflared` release binaries — unlike aube, there is nothing to verify the download against beyond the TLS connection to GitHub's release CDN. These images pin a specific `cloudflared` version and confirm the binary runs, but that is a weaker guarantee than a cryptographically verified download. If you need supply-chain assurance for `cloudflared` itself, verify it out of band.
+> [!NOTE]
+> Cloudflare publishes a **SHA256 checksum** for every release asset in the GitHub release notes, and these images **verify the downloaded binary against it at build time** — a mismatch fails the build. Unlike aube, Cloudflare does not additionally sign the binaries with sigstore (no keyless signature proving which workflow built them), so this verifies integrity against Cloudflare's published checksum but not signed provenance.
 
 ---
 

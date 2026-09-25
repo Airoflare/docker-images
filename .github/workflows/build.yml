@@ -108,6 +108,10 @@ jobs:
           pull: true
           no-cache: ${{ matrix.no_cache }}
           build-args: ${{ matrix.build_args }}
+          # Available to any image that mounts it (e.g. cloudflared's checksum
+          # lookup); a BuildKit secret, so it is not baked into the image.
+          secrets: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
           outputs: type=image,name=ghcr.io/${{ env.OWNER }}/${{ matrix.image }},push-by-digest=true,name-canonical=true,push=true,oci-mediatypes=true
           provenance: mode=max
           sbom: true

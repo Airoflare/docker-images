@@ -9,9 +9,11 @@ ARG CLOUDFLARED_VERSION
 FROM alpine:3.24 AS download
 ARG CLOUDFLARED_VERSION
 ARG TARGETARCH
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl jq
 COPY fetch-cloudflared.sh /usr/local/bin/fetch-cloudflared.sh
-RUN sh /usr/local/bin/fetch-cloudflared.sh
+# github_token (when passed) only authenticates the checksum API call; it is a
+# BuildKit secret, so it never lands in a layer.
+RUN --mount=type=secret,id=github_token sh /usr/local/bin/fetch-cloudflared.sh
 
 # BusyBox + CA bundle assembled from Alpine here - not pulled from another image.
 FROM alpine:3.24 AS rootfs
