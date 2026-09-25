@@ -2,11 +2,15 @@
 
 Small, automatically updated Docker images by [Airoflare](https://github.com/Airoflare). Every image is multi-arch (`linux/amd64`, `linux/arm64`) and is published to both GHCR and Docker Hub.
 
-## Images
+---
+
+## Available Images
 
 | Image | Description | Pull |
 |---|---|---|
 | [aube](images/aube) | Node.js with the [aube](https://aube.sh) package manager, for building JS apps | `ghcr.io/airoflare/aube` · `docker.io/airoflare/aube` |
+
+---
 
 ## Tags
 
@@ -18,6 +22,8 @@ Each image has its own tag list in its README. The rules are the same for all im
 
 All images are rebuilt every week to get base image security fixes. The version and moving tags then point to the new build. If you need the exact same image every time, pin a dated tag or a digest.
 
+---
+
 ## Verify an image
 
 Every image has an SBOM and SLSA provenance attached:
@@ -26,6 +32,8 @@ Every image has an SBOM and SLSA provenance attached:
 docker buildx imagetools inspect ghcr.io/airoflare/aube:latest --format '{{ json .SBOM }}'
 docker buildx imagetools inspect ghcr.io/airoflare/aube:latest --format '{{ json .Provenance }}'
 ```
+
+---
 
 ## How the builds work
 
@@ -51,6 +59,8 @@ Each arch is built natively on its own runner and pushed by digest. The publish 
 
 A second workflow, [`security.yml`](.github/workflows/security.yml), runs [Trivy](https://trivy.dev) once a week (after the rebuild) and writes a vulnerability count table into each image README. See the **Vulnerabilities** table in an image README, for example [aube](images/aube#vulnerabilities).
 
+---
+
 ## Add an image
 
 1. Make a folder `images/<name>/`. The folder name is the image name.
@@ -75,8 +85,3 @@ A second workflow, [`security.yml`](.github/workflows/security.yml), runs [Trivy
 
 4. Push to `master`. The workflow builds the new image.
 5. On the first run, the new GHCR package is private. Make it public in its package settings.
-
-## Repository setup
-
-- Repository secrets `DOCKER_USERNAME` and `DOCKER_TOKEN` with push access to the `airoflare` Docker Hub namespace. GHCR uses the built-in `GITHUB_TOKEN`.
-- The [Renovate GitHub App](https://github.com/apps/renovate) installed on this repository.
