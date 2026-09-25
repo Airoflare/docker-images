@@ -1,18 +1,20 @@
-# Assemble curl, its shared-library dependencies, and CA certificates using
-# Alpine's package manager. Only that runtime filesystem enters the final image.
+# Assemble curl, its shared-library dependencies, and CA certificates into a
+# fresh rootfs with Alpine's package manager, then ship that filesystem on
+# scratch. The Alpine package metadata (/etc/alpine-release, /etc/os-release,
+# /lib/apk/db/installed) is kept so image scanners can see the packages that are
+# present; no shell, package manager, or apk config ships.
 FROM alpine:3.24 AS curl-rootfs
-# ca-certificates-bundle is named explicitly: it ships the prebuilt
-# /etc/ssl/certs/ca-certificates.crt as a plain file, so the bundle exists even
-# though `apk --root` runs no post-install trigger to regenerate it.
-RUN apk add --no-cache findutils && \
-    mkdir -p /rootfs/etc/apk && \
+# alpine-release provides /etc/alpine-release and /etc/os-release (needed for OS
+# detection). ca-certificates-bundle ships the prebuilt /etc/ssl/certs/ca-
+# certificates.crt as a plain file, so the bundle exists even though `apk --root`
+# runs no post-install trigger to regenerate it.
+RUN mkdir -p /rootfs/etc/apk && \
     cp /etc/apk/repositories /rootfs/etc/apk/repositories && \
     cp -a /etc/apk/keys /rootfs/etc/apk/keys && \
-    apk --root /rootfs --initdb --no-cache add busybox curl ca-certificates ca-certificates-bundle && \
+    apk --root /rootfs --initdb --no-cache add alpine-release curl ca-certificates-bundle && \
     test -s /rootfs/etc/ssl/certs/ca-certificates.crt && \
-    find /rootfs -type l -lname '*busybox' -delete && \
-    rm -rf /rootfs/bin /rootfs/sbin && \
-    rm -rf /rootfs/etc/apk /rootfs/lib/apk /rootfs/var/cache/apk
+    rm -rf /rootfs/etc/apk /rootfs/var/cache/apk /rootfs/lib/apk/cache \
+           /rootfs/lib/apk/db/scripts.tar /rootfs/lib/apk/db/triggers
 
 FROM scratch AS final
 

@@ -1,11 +1,16 @@
-# Use Alpine only to obtain its statically linked BusyBox package. The final
-# image contains BusyBox and its applet links, with no Alpine runtime files.
+# Install Alpine's statically linked BusyBox into a fresh rootfs, then ship it on
+# scratch with its applet links. The Alpine package metadata (/etc/alpine-release,
+# /etc/os-release, /lib/apk/db/installed) is kept so image scanners can see that
+# BusyBox is present; no Alpine runtime, package manager, or apk config ships.
 FROM alpine:3.24 AS busybox
-RUN apk add --no-cache busybox-static && \
-    mkdir -p /rootfs/bin && \
-    cp /bin/busybox.static /rootfs/bin/busybox && \
-    cd /rootfs/bin && \
-    for applet in $(./busybox --list); do ln -s busybox "$applet"; done
+RUN mkdir -p /rootfs/etc/apk && \
+    cp /etc/apk/repositories /rootfs/etc/apk/repositories && \
+    cp -a /etc/apk/keys /rootfs/etc/apk/keys && \
+    apk --root /rootfs --initdb --no-cache add alpine-release busybox-static && \
+    mv /rootfs/bin/busybox.static /rootfs/bin/busybox && \
+    for applet in $(/rootfs/bin/busybox --list); do ln -sf busybox "/rootfs/bin/$applet"; done && \
+    rm -rf /rootfs/etc/apk /rootfs/var/cache/apk /rootfs/lib/apk/cache \
+           /rootfs/lib/apk/db/scripts.tar /rootfs/lib/apk/db/triggers
 
 FROM scratch AS final
 

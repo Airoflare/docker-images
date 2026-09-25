@@ -31,6 +31,12 @@
       "description": "One PR for all GitHub Actions updates",
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "description": "One PR for Alpine: the base image tags and the ALPINE_RELEASE helper pin must move together",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["alpine"],
+      "groupName": "Alpine"
     }
   ]
 }
