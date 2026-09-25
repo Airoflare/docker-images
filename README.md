@@ -10,6 +10,7 @@ Small, automatically updated Docker images by [Airoflare](https://github.com/Air
 |:---|:---|:--|
 | [aube](images/aube) | Node.js with the [aube](https://aube.sh) package manager, for building JS apps | ![Docker Pulls](https://shieldcn.dev/docker/pulls/airoflare/aube.svg?variant=secondary) |
 | [static](images/static) | Runtime base images for static binaries, with optional shell, curl, and CA certificates | ![Docker Pulls](https://shieldcn.dev/docker/pulls/airoflare/static.svg?variant=secondary) |
+| [cloudflared](images/cloudflared) | [Cloudflare Tunnel](https://github.com/cloudflare/cloudflared) on a scratch base, with an optional BusyBox debug shell | ![Docker Pulls](https://shieldcn.dev/docker/pulls/airoflare/cloudflared.svg?variant=secondary) |
 
 ---
 

@@ -1,0 +1,8 @@
+{
+  "description": "Cloudflare Tunnel (cloudflared) on a minimal scratch base, with an optional BusyBox debug shell.",
+  "homepage": "https://github.com/cloudflare/cloudflared",
+  "license": "Apache-2.0",
+  "version_arg": "CLOUDFLARED_VERSION",
+  "variants": ["default", "debug"],
+  "default_variant": "default"
+}
