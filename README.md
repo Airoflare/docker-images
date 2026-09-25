@@ -6,9 +6,9 @@ Small, automatically updated Docker images by [Airoflare](https://github.com/Air
 
 ## Available Images
 
-| Image | Description |
-|:---|:---|
-| [aube](images/aube) | Node.js with the [aube](https://aube.sh) package manager, for building JS apps |
+| Image | Description | Stats
+|:---|:---|:--|
+| [aube](images/aube) | Node.js with the [aube](https://aube.sh) package manager, for building JS apps | ![Docker Pulls](https://shieldcn.dev/docker/pulls/airoflare/aube.svg?variant=secondary) |
 
 ---
 
