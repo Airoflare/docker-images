@@ -33,7 +33,12 @@ Use the **debian** variant if your app has native dependencies that don't play w
 ## Vulnerabilities
 
 <!-- TRIVY:START -->
-_Not scanned yet. The table is filled in by the weekly [Scan images](../../.github/workflows/security.yml) workflow._
+| Tag | Critical | High | Medium | Low | Unknown |
+|---|---|---|---|---|---|
+| `alpine` | 0 | 0 | 0 | 0 | 0 |
+| `debian` | 0 | 43 | 53 | 56 | 2 |
+
+_Scanned 2026-09-25 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ## Usage
