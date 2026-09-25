@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    "schedule:weekends"
+  ],
+  "packageRules": [
+    {
+      "description": "Stay on Node 24 (LTS). Change this to move to a new major.",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["node"],
+      "allowedVersions": "<25"
+    },
+    {
+      "description": "One PR for all GitHub Actions updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    }
+  ]
+}
