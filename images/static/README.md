@@ -32,7 +32,18 @@ For the exact Alpine version in a tag, see the corresponding Dockerfile. The she
 ## Vulnerabilities
 
 <!-- TRIVY:START -->
-_Not scanned yet. This table is filled in automatically after the first publish. The `minimal` variant is empty `scratch` and carries no OS or language packages to scan._
+| Tag | Arch | Critical | High | Medium | Low | Unknown |
+|---|---|---|---|---|---|---|
+| `minimal` | amd64 | 0 | 0 | 0 | 0 | 0 |
+| `minimal` | arm64 | 0 | 0 | 0 | 0 | 0 |
+| `shell` | amd64 | 0 | 0 | 0 | 0 | 0 |
+| `shell` | arm64 | 0 | 0 | 0 | 0 | 0 |
+| `curl` | amd64 | 0 | 0 | 0 | 0 | 0 |
+| `curl` | arm64 | 0 | 0 | 0 | 0 | 0 |
+| `certs` | amd64 | 0 | 0 | 0 | 0 | 0 |
+| `certs` | arm64 | 0 | 0 | 0 | 0 | 0 |
+
+_Scanned 2026-09-25 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ## Usage
