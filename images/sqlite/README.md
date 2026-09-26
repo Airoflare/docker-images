@@ -2,7 +2,7 @@
 
 The [SQLite](https://sqlite.org) CLI (`sqlite3`) on a minimal `scratch` base. Run it interactively and you land **straight in the SQLite prompt** — no shell dance, no full OS image. A statically linked BusyBox is included, so you can still `docker exec` in for file work when you need it.
 
-The image is the Alpine `sqlite` build and its runtime libraries on `scratch`, nothing else: no package manager, no application server, just the tool.
+The image is the Alpine `sqlite` build and its runtime libraries on `scratch`, nothing else: no package manager, no application server, just the tool. SQLite is public domain (SPDX: [`blessing`](https://spdx.org/licenses/blessing.html), the "SQLite Blessing"), which is the value in the image's `org.opencontainers.image.licenses` label.
 
 ---
 
