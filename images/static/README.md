@@ -46,7 +46,7 @@ For the exact versions in a given tag, see the [GHCR package page](https://githu
 | `certs` | amd64 | 0 | 0 | 0 | 0 | 0 |
 | `certs` | arm64 | 0 | 0 | 0 | 0 | 0 |
 
-_Scanned 2026-09-25 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-09-26 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ---
