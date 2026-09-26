@@ -1,0 +1,8 @@
+{
+  "description": "MinIO Client (mc) built from the last open-source release, on a scratch base with a BusyBox shell.",
+  "homepage": "https://github.com/minio/mc",
+  "license": "AGPL-3.0-or-later",
+  "version_arg": "MC_VERSION",
+  "variants": ["default"],
+  "default_variant": "default"
+}

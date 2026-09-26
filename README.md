@@ -12,6 +12,8 @@ Small, automatically updated Docker images by [Airoflare](https://github.com/Air
 | [static](images/static) | Runtime base images for static binaries, with optional shell, curl, and CA certificates | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/static?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
 | [cloudflared](images/cloudflared) | [Cloudflare Tunnel](https://github.com/cloudflare/cloudflared) on a scratch base, with an optional BusyBox debug shell | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/cloudflared?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
 | [sqlite](images/sqlite) | The [SQLite](https://sqlite.org) CLI on a scratch base with a BusyBox shell — run it to drop straight into the SQLite prompt | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/sqlite?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
+| [minio](images/minio) | The [MinIO](https://github.com/minio/minio) object storage server, built from the last open-source release after MinIO removed its images | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/minio?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
+| [mc](images/mc) | The open-source [MinIO Client](https://github.com/minio/mc) (`mc`), built from the last open-source release | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/mc?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
 
 ---
 

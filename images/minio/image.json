@@ -1,0 +1,8 @@
+{
+  "description": "MinIO object storage server, built from the last open-source release, on a scratch base with a BusyBox shell.",
+  "homepage": "https://github.com/minio/minio",
+  "license": "AGPL-3.0-or-later",
+  "version_arg": "MINIO_VERSION",
+  "variants": ["default"],
+  "default_variant": "default"
+}
