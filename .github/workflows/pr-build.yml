@@ -1,0 +1,96 @@
+name: PR build
+
+# Build (but do not push) the images a pull request changes, so base-image and
+# toolchain bumps - e.g. a Renovate golang/alpine update - are proven to compile
+# before they are merged. The real publish pipeline runs only on push to master.
+on:
+  pull_request:
+    paths:
+      - 'images/**'
+      - 'scripts/helpers/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-build-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  changed:
+    runs-on: ubuntu-26.04
+    outputs:
+      images: ${{ steps.detect.outputs.images }}
+      any: ${{ steps.detect.outputs.any }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Map each changed path to an image folder (a variant Dockerfile/README or
+      # its helper), keeping only those that still have an image.json.
+      - name: Find changed images
+        id: detect
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          changed=$(git diff --name-only "$BASE" HEAD -- images/ scripts/helpers/ \
+            | sed -E 's#^images/([^/]+)/.*#\1#; s#^scripts/helpers/([^/]+)\.sh$#\1#' \
+            | sort -u)
+          imgs=()
+          for name in $changed; do
+            [ -f "images/$name/image.json" ] && imgs+=("$name")
+          done
+          json=$(printf '%s\n' "${imgs[@]}" | jq -R . | jq -cs 'map(select(length > 0))')
+          echo "images=$json" >> "$GITHUB_OUTPUT"
+          [ "${#imgs[@]}" -gt 0 ] && echo "any=true" >> "$GITHUB_OUTPUT" || echo "any=false" >> "$GITHUB_OUTPUT"
+          echo "Changed images: ${imgs[*]:-none}"
+
+  build:
+    needs: changed
+    if: needs.changed.outputs.any == 'true'
+    name: build ${{ matrix.image }}
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ${{ fromJSON(needs.changed.outputs.images) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      # Build every variant for linux/amd64 without pushing (type=cacheonly), the
+      # same way plan.sh resolves the file, version arg and version. A compile
+      # failure fails the check. github_token authenticates any checksum lookup
+      # (e.g. cloudflared); images that do not mount it ignore it.
+      - name: Build changed image variants (no push)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ${{ matrix.image }}
+        run: |
+          set -euo pipefail
+          cfg="images/$IMAGE/image.json"
+          version_arg=$(jq -r '.version_arg // "VERSION"' "$cfg")
+          for variant in $(jq -r '.variants[]' "$cfg"); do
+            if [ "$variant" = "default" ]; then
+              file="images/$IMAGE/Dockerfile"
+            else
+              file="images/$IMAGE/$variant.Dockerfile"
+            fi
+            version=$("scripts/helpers/$IMAGE.sh" "$variant")
+            echo "::group::build $IMAGE $variant ($version)"
+            docker buildx build \
+              --platform linux/amd64 \
+              --pull \
+              --output type=cacheonly \
+              --secret id=github_token,env=GH_TOKEN \
+              --build-arg "$version_arg=$version" \
+              -f "$file" "images/$IMAGE"
+            echo "::endgroup::"
+          done
