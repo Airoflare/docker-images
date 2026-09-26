@@ -7,7 +7,7 @@
 ARG MINIO_VERSION
 
 # Build stage - compile minio with the same version ldflags minio's own build sets.
-FROM golang:1.24-alpine AS builder
+FROM golang:1.27-alpine AS builder
 
 ARG MINIO_VERSION
 ARG TARGETARCH

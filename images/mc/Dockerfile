@@ -8,7 +8,7 @@
 ARG MC_VERSION
 
 # Build stage - compile mc with the same version ldflags mc's own build sets.
-FROM golang:1.24-alpine AS builder
+FROM golang:1.27-alpine AS builder
 
 ARG MC_VERSION
 ARG TARGETARCH
