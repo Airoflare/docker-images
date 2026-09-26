@@ -5,7 +5,7 @@ The [MinIO](https://github.com/minio/minio) object storage server (S3-compatible
 MinIO archived `github.com/minio/minio`, removed its Docker images, and pivoted to the closed-source AIStor product — breaking a lot of self-hosted setups that depended on the `minio/minio` image. This image keeps a working, multi-arch, signed MinIO server available by compiling the last open-source release from a preserved fork ([`Airoflare/minio-preserve`](https://github.com/Airoflare/minio-preserve)), so it does not depend on MinIO's registries or repos staying up.
 
 > [!WARNING]
-> **This open-source MinIO server is frozen — it is no longer developed.** MinIO stopped releasing the open-source server; ongoing development is in the closed-source AIStor product. Only the **Go toolchain and base image are refreshed** on each weekly rebuild (so the binary keeps getting Go-runtime and CA/BusyBox security fixes) — the MinIO version, features, and upstream fixes stay pinned at the last open-source release. Use it as a stable drop-in for the removed `minio/minio` image, not as a source of new MinIO functionality.
+> **This open-source MinIO server is frozen — it is no longer developed.** MinIO stopped releasing the open-source server; its current AIStor product uses MinIO's proprietary software license. Only the **Go toolchain and base image are refreshed** on each weekly rebuild — so the binary picks up fixes in the Go runtime/standard library it actually uses, plus CA and BusyBox updates, but **not** fixes to MinIO's frozen dependencies or its own application code. The MinIO version and features stay pinned at the last open-source release. Use it as a stable drop-in for the removed `minio/minio` image, not as a source of new MinIO functionality.
 
 ---
 
