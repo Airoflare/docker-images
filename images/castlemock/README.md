@@ -5,7 +5,7 @@
 Castle Mock's source is archived, and its official Docker Hub images are scheduled for deletion — after which no official images remain, despite the image having over a million pulls. This image keeps a working, multi-arch, signed Castle Mock available by compiling v1.68 from a preserved fork ([`Airoflare/castlemock-preserve`](https://github.com/Airoflare/castlemock-preserve)) into its executable Spring Boot jar, so it does not depend on Castle Mock's registries or repos staying up.
 
 > [!WARNING]
-> **Castle Mock is archived and frozen at v1.68 — it is no longer developed.** Only the **JRE and JDK toolchain are refreshed** on each weekly rebuild — so the app picks up **Java runtime/JVM security fixes** (where most CVEs land for a Java service), but **not** fixes to Castle Mock's frozen Java dependencies (Spring, Tomcat, etc.) or its own application code. The Castle Mock version and features stay pinned at v1.68. Use it as a stable drop-in for the disappearing `castlemock/castlemock` image, not as a source of new functionality.
+> **Castle Mock is archived and frozen at v1.68 — it is no longer developed.** Only the **JRE and JDK toolchain are refreshed** on each weekly rebuild — so the app picks up **Java runtime/JVM security fixes** (where most CVEs land for a Java service), but **not** fixes to Castle Mock's frozen Java dependencies (Spring, Tomcat, etc.) or its own application code. The Castle Mock version and features stay pinned at v1.68. Intended as a compatible replacement for deployments that previously used the final `castlemock/castlemock` release — not a source of new functionality.
 
 ---
 
