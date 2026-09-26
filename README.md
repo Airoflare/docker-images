@@ -1,6 +1,6 @@
-# docker-images
+# Airoflare Docker Images
 
-Small, automatically updated Docker images by [Airoflare](https://github.com/Airoflare). Every image is multi-arch (`linux/amd64`, `linux/arm64`) and is published to both GHCR and Docker Hub.
+Small, signed, multi-arch Docker images by [Airoflare](https://github.com/Airoflare) — useful minimal images plus preserved images for open-source projects whose official container distribution was discontinued or removed. On GHCR and Docker Hub, rebuilt weekly.
 
 ---
 
