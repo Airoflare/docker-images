@@ -1,0 +1,8 @@
+{
+  "description": "Castle Mock (REST & SOAP service mocking), the last open-source release, built from source and run on a maintained JRE.",
+  "homepage": "https://github.com/castlemock/castlemock",
+  "license": "Apache-2.0",
+  "version_arg": "CASTLEMOCK_VERSION",
+  "variants": ["default"],
+  "default_variant": "default"
+}

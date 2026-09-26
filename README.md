@@ -14,6 +14,7 @@ Small, automatically updated Docker images by [Airoflare](https://github.com/Air
 | [sqlite](images/sqlite) | The [SQLite](https://sqlite.org) CLI on a scratch base with a BusyBox shell — run it to drop straight into the SQLite prompt | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/sqlite?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
 | [minio](images/minio) | The [MinIO](https://github.com/minio/minio) object storage server, built from the last open-source release after MinIO removed its images | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/minio?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
 | [mc](images/mc) | The open-source [MinIO Client](https://github.com/minio/mc) (`mc`), built from the last open-source release | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/mc?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
+| [castlemock](images/castlemock) | [Castle Mock](https://github.com/castlemock/castlemock) REST/SOAP service mocking, built from the last open-source release before its images are deleted | ![Docker Pulls](https://img.shields.io/docker/pulls/airoflare/castlemock?style=flat&logo=docker&logoColor=fafafa&labelColor=27272a&color=27272a) |
 
 ---
 
