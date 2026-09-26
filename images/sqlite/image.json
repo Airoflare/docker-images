@@ -1,0 +1,8 @@
+{
+  "description": "SQLite CLI (sqlite3) on a scratch base with a BusyBox shell - run it interactively to drop straight into the SQLite prompt.",
+  "homepage": "https://sqlite.org",
+  "license": "blessing",
+  "version_arg": "SQLITE_VERSION",
+  "variants": ["default"],
+  "default_variant": "default"
+}
