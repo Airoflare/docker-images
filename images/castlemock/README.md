@@ -40,7 +40,7 @@ The Castle Mock version never changes, but weekly rebuilds recompile it with the
 | `latest` | amd64 | 8 | 26 | 37 | 12 | 0 |
 | `latest` | arm64 | 8 | 26 | 37 | 12 | 0 |
 
-_Scanned 2026-09-26 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-09-27 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Trivy scans the JRE base (Alpine packages) and the Castle Mock jar's bundled Java libraries. Because Castle Mock is frozen, findings in those Java dependencies can only be resolved by upstream, not by a rebuild — a JDK/JRE bump only fixes Java-runtime CVEs.
