@@ -37,8 +37,8 @@ The Castle Mock version never changes, but weekly rebuilds recompile it with the
 <!-- TRIVY:START -->
 | Tag | Arch | Critical | High | Medium | Low | Unknown |
 |---|---|---|---|---|---|---|
-| `latest` | amd64 | 8 | 27 | 40 | 12 | 0 |
-| `latest` | arm64 | 8 | 27 | 40 | 12 | 0 |
+| `latest` | amd64 | 8 | 27 | 40 | 12 | 1 |
+| `latest` | arm64 | 8 | 27 | 40 | 12 | 1 |
 
 _Scanned 2026-09-30 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
