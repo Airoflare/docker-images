@@ -49,7 +49,7 @@ Trivy scans both the `mc` Go binary (for CVEs in its Go dependencies) and the Al
 
 ## Usage
 
-`mc` is the entrypoint, so pass its subcommands directly. Configuration and aliases are written under `/home/mc/.mc` (the container's writable `HOME`); mount it to persist them, or use `MC_HOST_<alias>` environment variables to avoid writing config at all.
+`mc` is the entrypoint, so pass its subcommands directly. Configuration and aliases are written under `/root/.mc`, the same path as the original `minio/mc` image; mount it to persist them, or use `MC_HOST_<alias>` environment variables to avoid writing config at all.
 
 Mirror a bucket, configuring the alias inline via env:
 
@@ -63,9 +63,9 @@ docker run --rm \
 Persist aliases across runs by mounting the config directory, then use them:
 
 ```bash
-docker run --rm -v mc-config:/home/mc/.mc ghcr.io/airoflare/mc \
+docker run --rm -v mc-config:/root/.mc ghcr.io/airoflare/mc \
   alias set myminio https://minio.example.com ACCESS_KEY SECRET_KEY
-docker run --rm -v mc-config:/home/mc/.mc ghcr.io/airoflare/mc ls myminio
+docker run --rm -v mc-config:/root/.mc ghcr.io/airoflare/mc ls myminio
 ```
 
 Chain several commands with the bundled shell:
@@ -75,7 +75,7 @@ docker run --rm --entrypoint /bin/sh ghcr.io/airoflare/mc -c \
   'mc alias set m https://minio.example.com KEY SECRET && mc mb m/newbucket && mc ls m'
 ```
 
-The process runs as UID/GID `55555`, and `/home/mc` is owned by that ID so `mc` can write its config. `mc` needs the CA bundle (already included, with `SSL_CERT_FILE` set) to reach HTTPS endpoints.
+The process runs as root, like the original `minio/mc` image, so mounted directories work without permission changes. `mc` needs the CA bundle (already included, with `SSL_CERT_FILE` set) to reach HTTPS endpoints.
 
 ---
 

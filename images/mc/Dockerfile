@@ -48,7 +48,7 @@ RUN mkdir -p /rootfs/etc/apk && \
     mv /rootfs/bin/busybox.static /rootfs/bin/busybox && \
     for applet in $(/rootfs/bin/busybox --list); do ln -sf busybox "/rootfs/bin/$applet"; done && \
     test -s /rootfs/etc/ssl/certs/ca-certificates.crt && \
-    mkdir -p /rootfs/home/mc && chown 55555:55555 /rootfs/home/mc && \
+    mkdir -p /rootfs/root && \
     rm -rf /rootfs/etc/apk /rootfs/var/cache/apk /rootfs/lib/apk/cache \
            /rootfs/lib/apk/db/scripts.tar /rootfs/lib/apk/db/triggers
 
@@ -66,9 +66,6 @@ LABEL org.opencontainers.image.title="mc" \
 COPY --from=rootfs /rootfs/ /
 COPY --from=builder /out/mc /usr/bin/mc
 
-ENV HOME=/home/mc \
-    MC_CONFIG_DIR=/home/mc/.mc \
+ENV HOME=/root \
     SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-WORKDIR /home/mc
-USER 55555:55555
 ENTRYPOINT ["mc"]

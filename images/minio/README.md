@@ -82,7 +82,7 @@ volumes:
   minio-data:
 ```
 
-The process runs as UID/GID `55555`, and `/data` is owned by that ID. If you bind-mount a host directory instead of a named volume, make sure it is writable by UID `55555`. Pair it with the [`mc`](../mc) client image to manage buckets.
+The process runs as root, like the original MinIO image, so named volumes and bind-mounted host directories work without permission changes. Pair it with the [`mc`](../mc) client image to manage buckets.
 
 ---
 
