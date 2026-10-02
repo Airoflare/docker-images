@@ -1,0 +1,8 @@
+{
+  "description": "Electric sync service (Postgres sync engine), built from the last release in a preserved fork after ElectricSQL removed its images.",
+  "homepage": "https://electric-sql.com",
+  "license": "Apache-2.0",
+  "version_arg": "ELECTRIC_VERSION",
+  "variants": ["default"],
+  "default_variant": "default"
+}
