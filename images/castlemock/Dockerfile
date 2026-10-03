@@ -9,7 +9,7 @@
 ARG CASTLEMOCK_VERSION
 
 # Build stage - compile the embedded-Tomcat executable jar (deploy-tomcat-jar).
-FROM maven:3.9-eclipse-temurin-21 AS builder
+FROM maven:3.10-eclipse-temurin-21 AS builder
 
 # Commit of the last open-source release (v1.68). Keep it in step with
 # CASTLEMOCK_VERSION in scripts/helpers/castlemock.sh when moving to another.
