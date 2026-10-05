@@ -37,7 +37,7 @@ Images are rebuilt every week, so all tags except the `-<date>` tags move to the
 | `latest` | amd64 | 0 | 0 | 0 | 0 | 0 |
 | `latest` | arm64 | 0 | 0 | 0 | 0 | 0 |
 
-_Scanned 2026-10-02 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-05 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ---
