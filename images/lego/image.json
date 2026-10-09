@@ -1,0 +1,8 @@
+{
+  "description": "The lego ACME client on a minimal scratch base, with an optional BusyBox debug shell.",
+  "homepage": "https://github.com/go-acme/lego",
+  "license": "MIT",
+  "version_arg": "LEGO_VERSION",
+  "variants": ["default", "debug"],
+  "default_variant": "default"
+}
