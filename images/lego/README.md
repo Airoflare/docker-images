@@ -51,6 +51,14 @@ Both variants run as UID/GID `55555` in `/data` (also `HOME`), with `ENTRYPOINT 
 ## Vulnerabilities
 
 <!-- TRIVY:START -->
+| Tag | Arch | Critical | High | Medium | Low | Unknown |
+|---|---|---|---|---|---|---|
+| `latest` | amd64 | 0 | 2 | 3 | 0 | 14 |
+| `latest` | arm64 | 0 | 2 | 3 | 0 | 14 |
+| `debug` | amd64 | 0 | 2 | 3 | 0 | 14 |
+| `debug` | arm64 | 0 | 2 | 3 | 0 | 14 |
+
+_Scanned 2026-10-09 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Any findings here are in `lego`'s own Go dependencies (upstream code), not in the packaging.

@@ -42,12 +42,12 @@ Both variants run as UID/GID `55555`, with `ENTRYPOINT ["cloudflared", "--no-aut
 <!-- TRIVY:START -->
 | Tag | Arch | Critical | High | Medium | Low | Unknown |
 |---|---|---|---|---|---|---|
-| `latest` | amd64 | 0 | 0 | 2 | 0 | 1 |
-| `latest` | arm64 | 0 | 0 | 2 | 0 | 1 |
-| `debug` | amd64 | 0 | 0 | 2 | 0 | 1 |
-| `debug` | arm64 | 0 | 0 | 2 | 0 | 1 |
+| `latest` | amd64 | 0 | 2 | 5 | 0 | 14 |
+| `latest` | arm64 | 0 | 2 | 5 | 0 | 14 |
+| `debug` | amd64 | 0 | 2 | 5 | 0 | 14 |
+| `debug` | arm64 | 0 | 2 | 5 | 0 | 14 |
 
-_Scanned 2026-10-07 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-09 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Any findings here are in `cloudflared`'s own Go dependencies (upstream code), not in the packaging. They are surfaced only because these images carry an SBOM and are scanned; the official image publishes neither.
