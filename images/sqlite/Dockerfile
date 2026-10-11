@@ -13,7 +13,7 @@
 # the SQLite version: Renovate's docker manager keeps it current, and
 # scripts/helpers/sqlite.sh reads the version from this line. The tag format is
 # <sqlite-version>-v<image-version> (e.g. 3.53.4-v0.1.0).
-FROM peakimages/sqlite:3.53.4-v0.1.0 AS sqlite
+FROM peakimages/sqlite:3.54.0-v0.1.0 AS sqlite
 
 FROM alpine:3.24 AS rootfs
 RUN mkdir -p /rootfs/etc/apk && \
