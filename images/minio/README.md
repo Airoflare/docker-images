@@ -37,10 +37,10 @@ The MinIO version never changes, but weekly rebuilds recompile it with the curre
 <!-- TRIVY:START -->
 | Tag | Arch | Critical | High | Medium | Low | Unknown |
 |---|---|---|---|---|---|---|
-| `latest` | amd64 | 6 | 41 | 23 | 2 | 16 |
-| `latest` | arm64 | 6 | 41 | 23 | 2 | 16 |
+| `latest` | amd64 | 6 | 40 | 22 | 2 | 5 |
+| `latest` | arm64 | 6 | 40 | 22 | 2 | 5 |
 
-_Scanned 2026-10-09 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-12 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Trivy scans both the `minio` Go binary (for CVEs in its Go dependencies) and the Alpine `ca-certificates` package. Because MinIO is frozen, dependency findings can only be resolved by a Go-toolchain bump on rebuild, not by a MinIO update.
