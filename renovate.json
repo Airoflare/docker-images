@@ -28,6 +28,13 @@
       "allowedVersions": "<25"
     },
     {
+      "description": "Stay on Maven 3.9 for castlemock: Maven 3.10 rejects the duplicate jackson-databind entry in the frozen castlemock pom.xml",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["maven"],
+      "matchFileNames": ["images/castlemock/Dockerfile"],
+      "allowedVersions": "<3.10"
+    },
+    {
       "description": "One PR for all GitHub Actions updates",
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
