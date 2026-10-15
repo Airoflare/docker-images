@@ -40,7 +40,7 @@ The `mc` version never changes, but weekly rebuilds recompile it with the curren
 | `latest` | amd64 | 1 | 23 | 18 | 0 | 5 |
 | `latest` | arm64 | 1 | 23 | 18 | 0 | 5 |
 
-_Scanned 2026-10-12 with Trivy 0.74.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-15 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Trivy scans both the `mc` Go binary (for CVEs in its Go dependencies) and the Alpine `ca-certificates` package. Because `mc` is frozen, dependency findings can only be resolved by a Go-toolchain bump on rebuild, not by an `mc` update.
