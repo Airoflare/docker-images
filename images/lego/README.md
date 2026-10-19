@@ -53,12 +53,12 @@ Both variants run as UID/GID `55555` in `/data` (also `HOME`), with `ENTRYPOINT 
 <!-- TRIVY:START -->
 | Tag | Arch | Critical | High | Medium | Low | Unknown |
 |---|---|---|---|---|---|---|
-| `latest` | amd64 | 0 | 4 | 12 | 1 | 2 |
-| `latest` | arm64 | 0 | 4 | 12 | 1 | 2 |
-| `debug` | amd64 | 0 | 4 | 12 | 1 | 2 |
-| `debug` | arm64 | 0 | 4 | 12 | 1 | 2 |
+| `latest` | amd64 | 0 | 4 | 13 | 1 | 1 |
+| `latest` | arm64 | 0 | 4 | 13 | 1 | 1 |
+| `debug` | amd64 | 0 | 4 | 13 | 1 | 1 |
+| `debug` | arm64 | 0 | 4 | 13 | 1 | 1 |
 
-_Scanned 2026-10-17 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-19 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Any findings here are in `lego`'s own Go dependencies (upstream code), not in the packaging.
