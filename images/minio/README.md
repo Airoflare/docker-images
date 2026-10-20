@@ -37,8 +37,8 @@ The MinIO version never changes, but weekly rebuilds recompile it with the curre
 <!-- TRIVY:START -->
 | Tag | Arch | Critical | High | Medium | Low | Unknown |
 |---|---|---|---|---|---|---|
-| `latest` | amd64 | 6 | 41 | 24 | 2 | 2 |
-| `latest` | arm64 | 6 | 41 | 24 | 2 | 2 |
+| `latest` | amd64 | 6 | 42 | 24 | 2 | 2 |
+| `latest` | arm64 | 6 | 42 | 24 | 2 | 2 |
 
 _Scanned 2026-10-20 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
