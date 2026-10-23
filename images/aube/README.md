@@ -37,12 +37,12 @@ Use the **debian** variant if your app has native dependencies that don't play w
 <!-- TRIVY:START -->
 | Tag | Arch | Critical | High | Medium | Low | Unknown |
 |---|---|---|---|---|---|---|
-| `alpine` | amd64 | 0 | 0 | 1 | 0 | 0 |
-| `alpine` | arm64 | 0 | 0 | 1 | 0 | 0 |
-| `debian` | amd64 | 0 | 43 | 58 | 60 | 3 |
-| `debian` | arm64 | 0 | 43 | 58 | 60 | 3 |
+| `alpine` | amd64 | 0 | 0 | 0 | 0 | 0 |
+| `alpine` | arm64 | 0 | 0 | 0 | 0 | 0 |
+| `debian` | amd64 | 0 | 43 | 58 | 60 | 1 |
+| `debian` | arm64 | 0 | 43 | 58 | 60 | 1 |
 
-_Scanned 2026-10-21 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-23 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ## Usage

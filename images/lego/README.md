@@ -58,7 +58,7 @@ Both variants run as UID/GID `55555` in `/data` (also `HOME`), with `ENTRYPOINT 
 | `debug` | amd64 | 0 | 5 | 13 | 1 | 1 |
 | `debug` | arm64 | 0 | 5 | 13 | 1 | 1 |
 
-_Scanned 2026-10-21 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-10-23 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 Any findings here are in `lego`'s own Go dependencies (upstream code), not in the packaging.
