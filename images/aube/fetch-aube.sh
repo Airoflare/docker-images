@@ -14,7 +14,7 @@ set -eu
 # but not the two SHAs below; the checksum check then fails until they are
 # updated by hand from the release's cosign_checksums.txt (a safe failure).
 # renovate: datasource=github-releases depName=sigstore/cosign
-COSIGN_VERSION=3.1.3
+COSIGN_VERSION=3.1.4
 COSIGN_SHA_amd64=4629c757b7618056f8ddd7e2625ae9fdd94c0372a65049520bc7d9df9efc7f71
 COSIGN_SHA_arm64=c5d324e091826b0d7a78eb16fef316450b4eb9aaec045611c08ba06f5e73220a
 
