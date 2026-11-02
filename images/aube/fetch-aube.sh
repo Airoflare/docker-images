@@ -15,8 +15,8 @@ set -eu
 # updated by hand from the release's cosign_checksums.txt (a safe failure).
 # renovate: datasource=github-releases depName=sigstore/cosign
 COSIGN_VERSION=3.1.4
-COSIGN_SHA_amd64=4629c757b7618056f8ddd7e2625ae9fdd94c0372a65049520bc7d9df9efc7f71
-COSIGN_SHA_arm64=c5d324e091826b0d7a78eb16fef316450b4eb9aaec045611c08ba06f5e73220a
+COSIGN_SHA_amd64=424e2c97d0b45fd7a6b608a87f090f35633f4c23ece5f092d48bba11aaf4bbfa
+COSIGN_SHA_arm64=ade83b7aac62e131cacfe96d958948b2150cc9efec46a570a2649b8e27dedad2
 
 # aube's release workflow is the only trusted signer of the bundle.
 AUBE_ID_RE='^https://github.com/aubepkg/aube/\.github/workflows/[^@]+@refs/heads/main$'
