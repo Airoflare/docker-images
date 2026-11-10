@@ -40,7 +40,7 @@ Weekly rebuilds refresh the base images, then move `latest` and `<version>`. Pin
 | `latest` | amd64 | 4 | 58 | 172 | 179 | 5 |
 | `latest` | arm64 | 4 | 58 | 172 | 179 | 5 |
 
-_Scanned 2026-11-09 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-11-10 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ---

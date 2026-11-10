@@ -42,7 +42,7 @@ Use the **debian** variant if your app has native dependencies that don't play w
 | `debian` | amd64 | 0 | 48 | 75 | 64 | 0 |
 | `debian` | arm64 | 0 | 48 | 75 | 64 | 0 |
 
-_Scanned 2026-11-09 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-11-10 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ## Usage
