@@ -39,10 +39,10 @@ Use the **debian** variant if your app has native dependencies that don't play w
 |---|---|---|---|---|---|---|
 | `alpine` | amd64 | 0 | 0 | 7 | 4 | 0 |
 | `alpine` | arm64 | 0 | 0 | 7 | 4 | 0 |
-| `debian` | amd64 | 0 | 50 | 101 | 80 | 7 |
-| `debian` | arm64 | 0 | 50 | 101 | 80 | 7 |
+| `debian` | amd64 | 0 | 53 | 101 | 80 | 16 |
+| `debian` | arm64 | 0 | 53 | 101 | 80 | 16 |
 
-_Scanned 2026-11-22 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
+_Scanned 2026-11-23 with Trivy 0.75.0. OS and language package CVEs, fixed and unfixed. Counts change as new advisories are published; a weekly rebuild pulls in base-image fixes._
 <!-- TRIVY:END -->
 
 ## Usage
